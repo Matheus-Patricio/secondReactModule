@@ -1,0 +1,35 @@
+.header {
+    background-color: blue ;
+    color: white;
+
+}
+.container {
+    max-width: 1240px;
+    padding: 1rem 2rem;
+    margin: 0 auto;
+    
+    div:first-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        h1 {
+            font-size: 48px;
+        }
+        span {
+            font-size: 20px;
+        }
+
+
+    }
+    div:last-child {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        
+
+
+        transform: translatey(50%);
+    }
+}
+    
