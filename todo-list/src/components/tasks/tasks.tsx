@@ -1,5 +1,5 @@
 import tasksStyle from './task.module.scss'
-import React, {FormEvent, useState} from 'react'
+import React, {FormEvent, useEffect, useState} from 'react'
 
 interface Task {
     title: string
@@ -11,6 +11,14 @@ export const Tasks: React.FC = () => {
     const [taskTitle, setsTaskTitle] = useState('')
     const [tasks, setTasks] = useState([] as Task[])
 
+    const [inputBox, setInputBox] = useState(false)
+
+    const inputHandler = () => {
+        setInputBox(!inputBox)
+    }
+
+    
+
     function handleSubmit(event: FormEvent) {
         event.preventDefault()
 
@@ -18,12 +26,25 @@ export const Tasks: React.FC = () => {
         alert('Invalido, titulo menor que 3 caracteres!')
         }
         
-        
-        setTasks([
+        const newTasks = [
             ...tasks, //pega todas as tarefas ja existentes e coloca esse novo valor do estado de tarefas
             { id: 1, title:taskTitle, done: false }
-        ])
+
+        ]
+        setTasks(newTasks)
+        localStorage.setItem('tasks', JSON.stringify(newTasks))
+
     }
+
+    useEffect(() => {
+
+        const taskOnLocalStorage = localStorage.getItem('tasks')
+        if (taskOnLocalStorage) {
+            setTasks(JSON.parse(taskOnLocalStorage))
+        }
+
+        
+    }, [])
 
     return (
         <section className={tasksStyle.container}>
@@ -44,7 +65,8 @@ export const Tasks: React.FC = () => {
                 {tasks.map(task => {
                     return(
                         <li>
-                            <input type="checkbox" id={`task-${task.id}`} />
+                            <input type="checkbox"
+                            id={`task-${task.id}`} />
                             <label htmlFor={`task-${task.id}`}>{task.title}</label>
                         </li>
                     )
