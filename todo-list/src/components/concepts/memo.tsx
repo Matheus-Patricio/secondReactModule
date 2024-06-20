@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 interface MemoizationProps {
     financialData: {
@@ -14,16 +14,29 @@ export const Memoization:React.FC<MemoizationProps> = ({financialData}) => {
     const [showValues, setShowValues] = useState(true)
 
 
+    //useMemo : Usada para memorizar(cachear) o valor de uma função/expressão.
+    const totalIncomes = useMemo(() => {
+        return financialData.incomes.reduce((total, incomes) => {
+            return total = total + incomes
+        },0)
+    }, [financialData.incomes])
 
-    const totalIncomes = financialData.incomes.reduce((total, incomes) => {
-        return total += incomes
-    }, 0)
+
+    const totalOutcomes = useMemo(() => {
+        return financialData.outcomes.reduce((total, outcomes) => {
+            return total = total + outcomes
+        },0)
+    }, [financialData.outcomes])
 
 
-    const totalOutcomes = financialData.outcomes.reduce((total, outcomes) => {
-        return total = total + outcomes
-    },0)
-
+    //useCallback : retorna a definição de uma função/expressão, apenas re-declarada quando necessário.
+    const call = useCallback(
+      (desconto:number) => {
+        return totalOutcomes + (1 * desconto)
+      },
+      [totalIncomes],
+    )
+    
 
     return (
         <div>

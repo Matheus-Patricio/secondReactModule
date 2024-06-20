@@ -16,7 +16,7 @@ function App() {
     
     <Refs />
 
-    <Memoization financialData={{ incomes: [20, 30, 50, 100], outcomes: [10, 20,110, 20] }}/>
+    <Memoization financialData={{ incomes: [20, 50, 100], outcomes: [10, 20,110, 20] }}/>
     </>
 
   );
