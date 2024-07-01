@@ -3,7 +3,7 @@
    max-width: 1240px;
     padding: 0 2rem;
     margin: 7rem auto 0;
-    
+
     form {
         display: flex;
         align-items: flex-end;
@@ -57,4 +57,7 @@
             }
         }
     }
+}
+.done {
+    text-decoration: line-through;
 }

@@ -5,19 +5,17 @@ import { Header } from './components/header/header';
 import { Tasks } from './components/tasks/tasks';
 import { Refs } from './components/concepts/refsConcept';
 import { Memoization } from './components/concepts/memo';
+import { TasksProvider } from './components/context/tasksContext';
 
 function App() {
 
 
   return (
-    <>
-    <Header />
-    <Tasks/>
-    
-    <Refs />
-
-    <Memoization financialData={{ incomes: [20, 50, 100], outcomes: [10, 20,110, 20] }}/>
-    </>
+    <TasksProvider>
+      <Header />
+      <Tasks/>
+      
+    </TasksProvider>
 
   );
 }
